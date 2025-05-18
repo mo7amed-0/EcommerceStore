@@ -2,11 +2,10 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="container mx-auto px-4 py-8 min-h-full">
-      <h1 className="text-4xl font-bold text-center mb-8">About ShopEase</h1>
-
+    <div className="md:min-h-[60vh]">
+      <h1 className="text-4xl font-bold text-center mb-14">About ShopEase</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
+        <div className="space-y-4 lg:w-[70%]">
           <h2 className="text-2xl font-semibold text-[#5141E4FF]">Our Story</h2>
           <p className="text-gray-600">
             ShopEase is your one-stop destination for all your shopping needs.

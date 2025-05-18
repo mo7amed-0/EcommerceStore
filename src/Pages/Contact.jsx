@@ -28,18 +28,18 @@ const Contact = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.name.trim()) {
-      newErrors.name = "الاسم مطلوب";
+      newErrors.name = "Name is required";
     }
     if (!formData.email.trim()) {
-      newErrors.email = "البريد الإلكتروني مطلوب";
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "البريد الإلكتروني غير صالح";
+      newErrors.email = "Invalid email address";
     }
     if (!formData.subject.trim()) {
-      newErrors.subject = "الموضوع مطلوب";
+      newErrors.subject = "Subject is required";
     }
     if (!formData.message.trim()) {
-      newErrors.message = "الرسالة مطلوبة";
+      newErrors.message = "Message is required";
     }
     return newErrors;
   };
@@ -64,27 +64,27 @@ const Contact = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">اتصل بنا</h1>
+    <div className="md:min-h-[60vh]">
+      <h1 className="text-4xl font-bold text-center mb-14">Contact Us</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Contact Information */}
         <div className="space-y-6">
           <div>
             <h2 className="text-2xl font-semibold text-[#5141E4FF] mb-4">
-              معلومات الاتصال
+              Contact Information
             </h2>
             <div className="space-y-4">
               <p className="flex items-center gap-2">
-                <span className="font-semibold">العنوان:</span>
-                <span>123 شارع التسوق، مدينة التجارة الإلكترونية</span>
+                <span className="font-semibold">Address:</span>
+                <span>123 Shopping Street, E-commerce City</span>
               </p>
               <p className="flex items-center gap-2">
-                <span className="font-semibold">البريد الإلكتروني:</span>
+                <span className="font-semibold">Email:</span>
                 <span>info@shopease.com</span>
               </p>
               <p className="flex items-center gap-2">
-                <span className="font-semibold">الهاتف:</span>
+                <span className="font-semibold">Phone:</span>
                 <span>+1 234 567 890</span>
               </p>
             </div>
@@ -92,11 +92,11 @@ const Contact = () => {
 
           <div>
             <h2 className="text-2xl font-semibold text-[#5141E4FF] mb-4">
-              ساعات العمل
+              Working Hours
             </h2>
             <div className="space-y-2">
-              <p>السبت - الخميس: 9:00 صباحاً - 6:00 مساءً</p>
-              <p>الجمعة: مغلق</p>
+              <p>Saturday - Thursday: 9:00 AM - 6:00 PM</p>
+              <p>Friday: Closed</p>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ const Contact = () => {
         {/* Contact Form */}
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-[#5141E4FF] mb-4">
-            أرسل لنا رسالة
+            Send Us a Message
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -112,7 +112,7 @@ const Contact = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="name"
               >
-                الاسم
+                Name
               </label>
               <input
                 type="text"
@@ -121,7 +121,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5141E4FF]"
-                placeholder="أدخل اسمك"
+                placeholder="Enter your name"
               />
               {errors.name && (
                 <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -133,7 +133,7 @@ const Contact = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="email"
               >
-                البريد الإلكتروني
+                Email
               </label>
               <input
                 type="email"
@@ -142,7 +142,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5141E4FF]"
-                placeholder="أدخل بريدك الإلكتروني"
+                placeholder="Enter your email"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -154,7 +154,7 @@ const Contact = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="subject"
               >
-                الموضوع
+                Subject
               </label>
               <input
                 type="text"
@@ -163,7 +163,7 @@ const Contact = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5141E4FF]"
-                placeholder="أدخل موضوع الرسالة"
+                placeholder="Enter message subject"
               />
               {errors.subject && (
                 <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
@@ -175,7 +175,7 @@ const Contact = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="message"
               >
-                الرسالة
+                Message
               </label>
               <textarea
                 id="message"
@@ -183,7 +183,7 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5141E4FF] h-32"
-                placeholder="اكتب رسالتك هنا"
+                placeholder="Write your message here"
               />
               {errors.message && (
                 <p className="text-red-500 text-sm mt-1">{errors.message}</p>
@@ -194,12 +194,12 @@ const Contact = () => {
               type="submit"
               className="w-full bg-[#5141E4FF] text-white px-4 py-3 rounded-lg hover:bg-[#4334D4FF] transition-colors"
             >
-              إرسال الرسالة
+              Send Message
             </button>
 
             {submitStatus === "success" && (
               <p className="text-green-500 text-center">
-                تم إرسال رسالتك بنجاح!
+                Your message has been sent successfully!
               </p>
             )}
           </form>

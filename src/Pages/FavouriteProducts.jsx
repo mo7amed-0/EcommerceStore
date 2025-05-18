@@ -8,6 +8,7 @@ const FavouriteProducts = () => {
   const favouriteProducts = useSelector((state) => state.app.favouriteProducts);
   const checkAdded = useSelector((state) => state.app.checkAdded);
   const dispatch = useDispatch();
+
   if (favouriteProducts.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -16,7 +17,7 @@ const FavouriteProducts = () => {
     );
   }
   return (
-    <div className="md:px-10 md:h-[60vh] mx-auto py-8 lgl:container">
+    <div className="md:min-h-[60vh] mx-auto">
       <h1 className="text-3xl font-bold bg-red my-5">
         Your Favourite Products
       </h1>
@@ -27,53 +28,41 @@ const FavouriteProducts = () => {
             className="border p-4 rounded shadow-lg flex flex-col  hover:scale-105 transition-transform duration-300 cursor-pointer"
           >
             <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr]  items-center gap-6">
-            <div className="flex justify-center">
+              <div className="flex justify-center">
                 <img
                   src={product.image}
                   alt={product.id}
-                  className="lg:w-[45%] md:w-[55%] w-[70%] h-auto object-contain"
+                  className="lg:w-[100%] md:w-[100%] sm:w-[60%] w-[70%]"
                 />
               </div>
               <div>
                 <div className="flex justify-between items-center ">
                   <h2 className="text-lg tracking-tight font-semibold">
-                    {product.title}
+                    {product.title.length > 70
+                      ? `${product.title.slice(0, 70)}...`
+                      : product.title}
                   </h2>
                   <p className="text-xs font-medium text-[#49498f] bg-[#E2E3FFFF] p-1 rounded-xl text-center">
                     {product.category}
                   </p>
                 </div>
-                <p className="text-sm tracking-tight w-[70%] lgl:w-full">
-                {product.description.length > 120
-                ? `${product.description.slice(0, 400)}...`
-                : product.description}
-                </p>
-                {/* <div className="flex">
-                  {Array.from({ length: 5 }, (_, index) => (
-                    <span
-                      key={index}
-                      className={`${
-                        index < Math.round(item.rating.rate)
-                          ? "text-yellow-500"
-                          : "text-gray-300"
-                      }`}
-                    >
-                      ★
-                    </span>
-                  ))}
-                  <span className="text-gray-700 text-sm mb-2">
-                    {`(${item.rating.rate})`}
+                <p className="text-sm tracking-tight">
+                  {product.description.length > 180
+                    ? `${product.description.slice(0, 180)}...`
+                    : product.description}
+                  <span className="text-xs ml-2 px-2 py-1 font-medium text-[#49498f] bg-[#E2E3FFFF] p-1 rounded-xl text-center">
+                    {product.brand}
+                    {console.log(product.brand)}
                   </span>
-                  <p className="ml-4">{item.rating.count}</p>
-                </div> */}
+                </p>
               </div>
             </div>
             <div className="flex justify-between items-center my-1">
               <p className="text-lg font-semibold">
                 ${parseFloat(product.price).toFixed(2)}
               </p>
-             <div className="flex gap-2">
-             <button
+              <div className="flex gap-2">
+                <button
                   id={`added${product.id}`}
                   className={`flex gap-3 items-center bg-[#5141E4FF] text-white px-4 py-2 rounded-2xl hover:bg-[#E2E3FFFF] hover:text-[#5141E4FF] hover:shadow-2xl hover:font-semibold transition duration-500 ${
                     checkAdded.includes(`added${product.id}`)
@@ -90,11 +79,10 @@ const FavouriteProducts = () => {
                         image: product.image,
                         price: product.price,
                         description: product.description,
+                        brand: product.brand,
                         category: product.category,
-                        rating: product.rating,
-                        totalPrice: product.price,
                         quantity: 1,
-                        idAdded: e.target.id,
+                        idIcon: e.target.id,
                       })
                     );
                   }}
@@ -121,7 +109,7 @@ const FavouriteProducts = () => {
                               price: product.price,
                               description: product.description,
                               category: product.category,
-                              rating: product.rating,
+                              brand: product.brand,
                               totalPrice: product.price,
                               quantity: 1,
                               idAdded: `added${product.id}`,
@@ -132,15 +120,20 @@ const FavouriteProducts = () => {
                     </>
                   )}
                 </button>
-              <button
-                className="bg-red text-[#5141E4FF] font-semibold px-4 py-2 rounded-xl hover:bg-[#5141E4FF] hover:text-[#fff] hover:px-4 hover:py-2 transition duration-500"
-                onClick={() => {
-                  dispatch(removeFromFavourite({ id: product.id, idIcon:`heart${product.id}` }));
-                }}
-              >
-                Remove
-              </button>
-             </div>
+                <button
+                  className="bg-red text-[#5141E4FF] font-semibold px-4 py-2 rounded-xl hover:bg-[#5141E4FF] hover:text-[#fff] hover:px-4 hover:py-2 transition duration-500"
+                  onClick={() => {
+                    dispatch(
+                      removeFromFavourite({
+                        id: product.id,
+                        idIcon: `heart${product.id}`,
+                      })
+                    );
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
             </div>
           </div>
         ))}

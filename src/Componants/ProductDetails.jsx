@@ -17,14 +17,14 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="md:px-10 md:h-[60vh] mx-auto py-8 lgl:container">
+    <div className="md:min-h-[60vh] mx-auto py-8 lgl:container">
       <div className="border p-6 rounded shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex justify-center">
             <img
               src={product.image}
               alt={product.title}
-              className="lg:w-[45%] md:w-[55%] w-[70%] h-auto object-contain"
+              className="lg:w-[45%] md:w-[80%] w-[70%] h-auto object-contain"
             />
           </div>
           <div className="space-y-4 flex flex-col justify-center">
@@ -37,26 +37,6 @@ const ProductDetails = () => {
               </p>
             </div>
             <p className="text-gray-600">{product.description}</p>
-            {/* <div className="flex items-center">
-              {Array.from({ length: 5 }, (_, index) => (
-                <span
-                  key={index}
-                  className={`${
-                    index < Math.round(product.rating.rate)
-                      ? "text-yellow-500"
-                      : "text-gray-300"
-                  }`}
-                >
-                  ★
-                </span>
-              ))}
-              <span className="text-gray-700 text-sm ml-2">
-                {`(${product.rating.rate})`}
-              </span>
-              <span className="text-gray-700 text-sm ml-4">
-                {`${product.rating.count} purchases`}
-              </span>
-            </div> */}
             <div className="flex justify-between items-center">
               <p className="font-bold text-xl">${product.price}</p>
               <div className="flex gap-2 items-center">
@@ -76,8 +56,8 @@ const ProductDetails = () => {
                         image: product.image,
                         price: product.price,
                         description: product.description,
+                        brand: product.brand,
                         category: product.category,
-                        rating: product.rating,
                         quantity: 1,
                         idIcon: e.target.id,
                       })
@@ -102,7 +82,7 @@ const ProductDetails = () => {
                         price: product.price,
                         description: product.description,
                         category: product.category,
-                        rating: product.rating,
+                        brand: product.brand,
                         totalPrice: product.price,
                         quantity: 1,
                         idAdded: e.target.id,

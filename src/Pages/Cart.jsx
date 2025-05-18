@@ -14,7 +14,7 @@ const Cart = () => {
     );
   }
   return (
-    <div className="md:px-10 md:h-[60vh] mx-auto py-8 lgl:container">
+    <div className="md:min-h-[60vh] mx-auto">
       <h1 className="text-4xl font-bold bg-red my-5">Your Cart</h1>
       <div className="grid grid-cols-1  lgl:grid-cols-2 xl:grid-cols-3 gap-6">
         {products.map((product) => (
@@ -27,19 +27,21 @@ const Cart = () => {
                 <img
                   src={product.image}
                   alt={product.id}
-                  className="lg:w-[50%] md:w-[100%] w-[70%] h-auto "
+                  className="lg:w-[50%] md:w-[100%] w-[70%] "
                 />
               </div>
               <div>
                 <div className="flex justify-between items-center ">
                   <h2 className="text-lg tracking-tight font-semibold">
-                    {product.title}
+                    {product.title.length > 80
+                      ? `${product.title.slice(0, 80)}...`
+                      : product.title}
                   </h2>
                   <p className="text-xs font-medium text-[#49498f] bg-[#E2E3FFFF] p-1 rounded-xl text-center">
                     {product.category}
                   </p>
                 </div>
-                <p className="text-sm tracking-tight w-[70%] lgl:w-full">
+                <p className="text-sm tracking-tight">
                   {product.description.length > 120
                     ? `${product.description.slice(0, 300)}...`
                     : product.description}{" "}

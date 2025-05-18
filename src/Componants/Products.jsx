@@ -54,7 +54,6 @@ const Products = () => {
               <span className="text-xs ml-2 px-2 py-1 font-medium text-[#49498f] bg-[#E2E3FFFF] p-1 rounded-xl text-center">
                 {product.brand}
               </span>
-              
             </p>
             <div className="flex justify-between items-center">
               <p className="font-bold">${product.price}</p>
@@ -75,8 +74,8 @@ const Products = () => {
                         image: product.image,
                         price: product.price,
                         description: product.description,
+                        brand: product.brand,
                         category: product.category,
-                        rating: product.rating,
                         quantity: 1,
                         idIcon: e.target.id,
                       })
@@ -101,7 +100,7 @@ const Products = () => {
                         price: product.price,
                         description: product.description,
                         category: product.category,
-                        rating: product.rating,
+                        brand: product.brand,
                         totalPrice: product.price,
                         quantity: 1,
                         idAdded: e.target.id,
