@@ -14,7 +14,7 @@ const Cart = () => {
     );
   }
   return (
-    <div>
+    <div className="md:px-10 md:h-[60vh] mx-auto py-8 lgl:container">
       <h1 className="text-4xl font-bold bg-red my-5">Your Cart</h1>
       <div className="grid grid-cols-1  lgl:grid-cols-2 xl:grid-cols-3 gap-6">
         {products.map((product) => (

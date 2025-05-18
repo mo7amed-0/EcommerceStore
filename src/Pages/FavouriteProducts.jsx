@@ -16,7 +16,7 @@ const FavouriteProducts = () => {
     );
   }
   return (
-    <div>
+    <div className="md:px-10 md:h-[60vh] mx-auto py-8 lgl:container">
       <h1 className="text-3xl font-bold bg-red my-5">
         Your Favourite Products
       </h1>

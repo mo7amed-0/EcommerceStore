@@ -1,9 +1,9 @@
-import axios from "axios";
+import productsData from "./ProductsAPI";
 
 export const ProductsData = async () => {
   try {
-    const response = await axios.get("https://fakestoreapi.in/api/products");
-    return response;
+    // Return the products data directly since it's already imported
+    return productsData;
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;

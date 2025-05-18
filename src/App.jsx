@@ -21,14 +21,14 @@ import Contact from "./Pages/Contact";
 
 const Layout = () => {
   return (
-    <>
+    <div className="">
       <Navbar />
       <div className="mt-20"></div>
       <div className="px-10 mx-auto">
         <Outlet />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -31,7 +31,7 @@ const RegisterPage = () => {
   const signInWithGoogle = async () => {
     signInWithPopup(auth, provider)
       .then(async (result) => {
-        const user = result.user;        
+        const user = result.user;
         const hasEmailPassword = user.providerData.some(
           (provider) => provider.providerId === "password"
         );
@@ -84,7 +84,6 @@ const RegisterPage = () => {
       );
       return;
     }
-    console.log("Starting user creation with:", { email, name });
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user;
@@ -110,16 +109,8 @@ const RegisterPage = () => {
             providerData: updatedUser.providerData,
           });
 
-          // Check authentication methods
           const methods = await fetchSignInMethodsForEmail(auth, email);
           console.log("Available sign-in methods:", methods);
-
-          if (methods.includes("password")) {
-            console.log("Password method is available");
-          } else {
-            console.log("Password method is NOT available");
-          }
-
           navigate("/loginpage");
         } catch (error) {
           console.error("Error in profile update:", error);
@@ -168,7 +159,10 @@ const RegisterPage = () => {
               id="username"
               placeholder="Enter your username"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                setNameError("");
+              }}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
@@ -187,7 +181,10 @@ const RegisterPage = () => {
               id="email"
               placeholder="Enter your email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailError("");
+              }}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
@@ -206,7 +203,10 @@ const RegisterPage = () => {
               id="password"
               placeholder="Enter your password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPasswordError("");
+              }}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>

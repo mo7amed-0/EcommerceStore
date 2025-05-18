@@ -10,7 +10,9 @@ import ReactLoading from "react-loading";
 // );
 const Products = () => {
   const data = useLoaderData();
-  const products = data.data.products;
+  console.log(data.products);
+
+  const products = data.products;
   const favouriteList = useSelector((state) => state.app.favouriteList);
   const checkAdded = useSelector((state) => state.app.checkAdded);
   const dispatch = useDispatch();
@@ -49,27 +51,11 @@ const Products = () => {
               {product.description.length > 120
                 ? `${product.description.slice(0, 120)}...`
                 : product.description}
+              <span className="text-xs ml-2 px-2 py-1 font-medium text-[#49498f] bg-[#E2E3FFFF] p-1 rounded-xl text-center">
+                {product.brand}
+              </span>
+              
             </p>
-            {/* <div className="flex justify-between items-center my-1"> */}
-              {/* <div>
-                {Array.from({ length: 5 }, (_, index) => (
-                  <span
-                    key={index}
-                    className={`${
-                      index < Math.round(product.rating.rate)
-                        ? "text-yellow-500"
-                        : "text-gray-300"
-                    }`}
-                  >
-                    ★
-                  </span>
-                ))}
-                <span className="text-gray-700 text-sm mb-2">
-                  {`(${product.rating.rate})`}
-                </span>
-              </div>
-              <p>{product.rating.count}</p>
-            </div> */}
             <div className="flex justify-between items-center">
               <p className="font-bold">${product.price}</p>
               <div className="flex gap-2 items-center">

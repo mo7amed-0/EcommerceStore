@@ -17,7 +17,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="md:px-10 mx-auto py-8 lgl:container">
+    <div className="md:px-10 md:h-[60vh] mx-auto py-8 lgl:container">
       <div className="border p-6 rounded shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex justify-center">
