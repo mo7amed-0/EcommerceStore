@@ -17,9 +17,9 @@ import RegisterPage from "./Pages/RegisterPage";
 import LoginPage from "./Pages/LoginPage";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-import ResetPassword from "./Pages/resetPassword";
 // import ResetPassword from "./Pages/resetPassword";
-// import ResetPassword from "./Pages/ResetPassword";
+// import ResetPassword from "./Pages/resetPassword";
+import ResetPassword from "./Pages/ResetPassword";
 const Layout = () => {
   return (
     <div>
