@@ -8,6 +8,7 @@ const appSlice = createSlice({
     favouriteCount: 0,
     favouriteProducts: [],
     checkAdded: [],
+    checkDisabled: [],
     favouriteList: [],
   },
   reducers: {
@@ -18,6 +19,7 @@ const appSlice = createSlice({
       } else {
         state.products.push({ ...action.payload, quantity: 1 });
         state.checkAdded.push(action.payload.idAdded);
+        state.checkDisabled.push(action.payload.idAdded);
         state.cartCount += 1;
       }
     },
@@ -41,6 +43,9 @@ const appSlice = createSlice({
           state.checkAdded = state.checkAdded.filter(
             (item) => item !== action.payload.idAdded
           );
+          state.checkDisabled = state.checkDisabled.filter(
+            (item) => item !== action.payload.idAdded
+          );
           state.cartCount -= 1;
         }
       }
@@ -50,6 +55,9 @@ const appSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
       state.checkAdded = state.checkAdded.filter(
+        (item) => item !== action.payload.idAdded
+      );
+      state.checkDisabled = state.checkDisabled.filter(
         (item) => item !== action.payload.idAdded
       );
       state.cartCount -= 1;

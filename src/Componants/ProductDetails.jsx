@@ -12,6 +12,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const favouriteList = useSelector((state) => state.app.favouriteList);
   const checkAdded = useSelector((state) => state.app.checkAdded);
+  const checkDisabled = useSelector((state) => state.app.checkDisabled);
   if (!product) {
     return <div className="text-center mt-10">المنتج غير موجود</div>;
   }
@@ -36,7 +37,13 @@ const ProductDetails = () => {
                 {product.category}
               </p>
             </div>
-            <p className="text-gray-600">{product.description}</p>
+            <p className="text-gray-600">
+              {product.description}
+              <span className="text-xs ml-2 px-2 py-1 font-medium text-[#49498f] bg-[#E2E3FFFF] p-1 rounded-xl text-center">
+                {product.brand}
+              </span>
+            </p>
+
             <div className="flex justify-between items-center">
               <p className="font-bold text-xl">${product.price}</p>
               <div className="flex gap-2 items-center">
@@ -70,24 +77,27 @@ const ProductDetails = () => {
                     checkAdded.includes(`added${product.id}`)
                       ? "opacity-70 hover:bg-[#5141e4]  hover:text-white transition duration-500"
                       : ""
-                  }`}
+                  } `}
                   onClick={(e) => {
                     e.stopPropagation();
-                    e.target.disabled = true;
-                    dispatch(
-                      addToCart({
-                        id: product.id,
-                        title: product.title,
-                        image: product.image,
-                        price: product.price,
-                        description: product.description,
-                        category: product.category,
-                        brand: product.brand,
-                        totalPrice: product.price,
-                        quantity: 1,
-                        idAdded: e.target.id,
-                      })
-                    );
+                    {
+                      !checkDisabled.includes(`added${product.id}`)
+                        ? dispatch(
+                            addToCart({
+                              id: product.id,
+                              title: product.title,
+                              image: product.image,
+                              price: product.price,
+                              description: product.description,
+                              category: product.category,
+                              brand: product.brand,
+                              totalPrice: product.price,
+                              quantity: 1,
+                              idAdded: e.target.id,
+                            })
+                          )
+                        : "";
+                    }
                   }}
                 >
                   {checkAdded.includes(`added${product.id}`) ? (

@@ -7,6 +7,7 @@ import { MdBookmarkAdded } from "react-icons/md";
 const FavouriteProducts = () => {
   const favouriteProducts = useSelector((state) => state.app.favouriteProducts);
   const checkAdded = useSelector((state) => state.app.checkAdded);
+  const checkDisabled = useSelector((state) => state.app.checkDisabled);
   const dispatch = useDispatch();
 
   if (favouriteProducts.length === 0) {
@@ -52,7 +53,6 @@ const FavouriteProducts = () => {
                     : product.description}
                   <span className="text-xs ml-2 px-2 py-1 font-medium text-[#49498f] bg-[#E2E3FFFF] p-1 rounded-xl text-center">
                     {product.brand}
-                    {console.log(product.brand)}
                   </span>
                 </p>
               </div>
@@ -71,20 +71,24 @@ const FavouriteProducts = () => {
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    e.target.disabled = true;
-                    dispatch(
-                      addToCart({
-                        id: product.id,
-                        title: product.title,
-                        image: product.image,
-                        price: product.price,
-                        description: product.description,
-                        brand: product.brand,
-                        category: product.category,
-                        quantity: 1,
-                        idIcon: e.target.id,
-                      })
-                    );
+                    {
+                      !checkDisabled.includes(`added${product.id}`)
+                        ? dispatch(
+                            addToCart({
+                              id: product.id,
+                              title: product.title,
+                              image: product.image,
+                              price: product.price,
+                              description: product.description,
+                              category: product.category,
+                              brand: product.brand,
+                              totalPrice: product.price,
+                              quantity: 1,
+                              idAdded: e.target.id,
+                            })
+                          )
+                        : "";
+                    }
                   }}
                 >
                   {checkAdded.includes(`added${product.id}`) ? (

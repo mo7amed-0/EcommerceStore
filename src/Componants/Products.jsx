@@ -10,11 +10,10 @@ import ReactLoading from "react-loading";
 // );
 const Products = () => {
   const data = useLoaderData();
-  console.log(data.products);
-
   const products = data.products;
   const favouriteList = useSelector((state) => state.app.favouriteList);
   const checkAdded = useSelector((state) => state.app.checkAdded);
+  const checkDisabled = useSelector((state) => state.app.checkDisabled);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -91,21 +90,24 @@ const Products = () => {
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    e.target.disabled = true;
-                    dispatch(
-                      addToCart({
-                        id: product.id,
-                        title: product.title,
-                        image: product.image,
-                        price: product.price,
-                        description: product.description,
-                        category: product.category,
-                        brand: product.brand,
-                        totalPrice: product.price,
-                        quantity: 1,
-                        idAdded: e.target.id,
-                      })
-                    );
+                    {
+                      !checkDisabled.includes(`added${product.id}`)
+                        ? dispatch(
+                            addToCart({
+                              id: product.id,
+                              title: product.title,
+                              image: product.image,
+                              price: product.price,
+                              description: product.description,
+                              category: product.category,
+                              brand: product.brand,
+                              totalPrice: product.price,
+                              quantity: 1,
+                              idAdded: e.target.id,
+                            })
+                          )
+                        : "";
+                    }
                   }}
                 >
                   {checkAdded.includes(`added${product.id}`) ? (
@@ -114,7 +116,7 @@ const Products = () => {
                     </>
                   ) : (
                     <>
-                      Add{" "}
+                      Add
                       <FaShoppingCart
                         onClick={(e) => {
                           e.stopPropagation();
