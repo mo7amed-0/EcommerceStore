@@ -35,14 +35,20 @@ const RegisterPage = () => {
         const hasEmailPassword = user.providerData.some(
           (provider) => provider.providerId === "password"
         );
-        dispatch(
-          showUserInfo({
-            userName: user.displayName,
-          })
-        );
+        console.log(hasEmailPassword,user.providerData);
+        
         if (hasEmailPassword) {
+          console.log("yesss");
+          
+          dispatch(
+            showUserInfo({
+              userName: user.displayName,
+            })
+          );
           navigate("/");
         } else {
+          console.log("nooo");
+          
           navigate("/resetpassword");
         }
       })

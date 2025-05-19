@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { auth } from "../Firebse/firebase";
 import { updatePassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { showUserInfo } from "../Redux/appSlice";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -9,7 +11,7 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const validatePassword = (password) => {
     if (password.length < 8) {
       return "Password must be at least 8 characters long";
@@ -44,6 +46,11 @@ const ResetPassword = () => {
       updatePassword(user, newPassword)
         .then(() => {
           console.log("Password updated!");
+          dispatch(
+            showUserInfo({
+              userName: user.displayName,
+            })
+          );
           navigate("/");
         })
         .catch((error) => {
